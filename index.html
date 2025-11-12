@@ -86,7 +86,7 @@
         const p=new Set(picks);
         const aim=1+(p.has("coke")?1.0:0);
         const strength=1+(p.has("fanta")?0.5:0);
-        const push=p.has("sprite")?15:0;
+        const push=p.has("sprite")?12:0;
         return {aim,strength,push};
       },[picks]);
 
@@ -125,7 +125,7 @@
         const target=distanceTarget+wind; const err=Math.abs(eff-target);
         const s=Math.max(0,Math.round(100-err)); setScore(s);
         const didHit=err<8; setHit(didHit);
-        const DRAG = 0.018; 
+        const DRAG = 0.022; 
         setLocked(true); setRunning(false); setShowJet(true);
         pushBoardRemote({ name, score:s, picks:[...picks], hit:didHit, ts:Date.now() });
       };
