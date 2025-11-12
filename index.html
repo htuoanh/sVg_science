@@ -84,9 +84,9 @@
       // generous buffs (easy mode)
       const attrs=useMemo(()=>{
         const p=new Set(picks);
-        const aim=1+(p.has("coke")?1.2:0);
+        const aim=1+(p.has("coke")?1.0:0);
         const strength=1+(p.has("fanta")?0.5:0);
-        const push=p.has("sprite")?20:0;
+        const push=p.has("sprite")?15:0;
         return {aim,strength,push};
       },[picks]);
 
