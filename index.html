@@ -95,7 +95,7 @@
       const lastTRef=useRef(null);
       useEffect(()=>{
         if(!running||locked) return;
-        let raf; const speed=3.2;
+        let raf; const speed=3.8;
         const loop=t=>{
           if(!lastTRef.current) lastTRef.current=t;
           const dt=(t-lastTRef.current)/1000; lastTRef.current=t;
@@ -153,7 +153,7 @@
         const s = Math.max(0, Math.round(100 - err));
         setScore(s);
 
-        const didHit = err < 11; // stricter window now that physics is more sensitive
+        const didHit = err < 12; // stricter window now that physics is more sensitive
         setHit(didHit);
         setLocked(true); setRunning(false); setShowJet(true);
 
