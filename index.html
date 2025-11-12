@@ -124,7 +124,7 @@
         const eff=rangeNoWind+attrs.push; setDistResult(eff);
         const target=distanceTarget+wind; const err=Math.abs(eff-target);
         const s=Math.max(0,Math.round(100-err)); setScore(s);
-        const didHit=err<8; setHit(didHit);
+        const didHit=err<12; setHit(didHit);
         const DRAG = 0.018; 
         setLocked(true); setRunning(false); setShowJet(true);
         pushBoardRemote({ name, score:s, picks:[...picks], hit:didHit, ts:Date.now() });
