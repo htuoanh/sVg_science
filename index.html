@@ -23,13 +23,14 @@
     const G=9.81, ANGLE_RAD=Math.PI/4;
 
     // ===== Firebase setup (REPLACE with your config) =====
-    const firebaseConfig={
-      apiKey:"YOUR_API_KEY",
-      authDomain:"YOUR_AUTH_DOMAIN",
-      projectId:"YOUR_PROJECT_ID",
-      storageBucket:"YOUR_STORAGE_BUCKET",
-      messagingSenderId:"YOUR_SENDER_ID",
-      appId:"YOUR_APP_ID"
+    const firebaseConfig = {
+      apiKey: "AIzaSyDDf_4ZwQSqoOPPYI240kmUL2D1QEDHTSs",
+      authDomain: "svgscience-6bb49.firebaseapp.com",
+      projectId: "svgscience-6bb49",
+      storageBucket: "svgscience-6bb49.firebasestorage.app",
+      messagingSenderId: "493468414507",
+      appId: "1:493468414507:web:fc5b8eaa2ea72763d3706e",
+      measurementId: "G-2TW8KPGW6L"
     };
     firebase.initializeApp(firebaseConfig);
     const db=firebase.firestore();
@@ -127,11 +128,11 @@
         // Base exit speed then amplify small changes via nonlinear coupling
         const v0 = val*26;
         const S = attrs.strength, A = attrs.aim, P = attrs.push;
-        const vEff = (v0 * (1 + 0.40*(S-1)) * Math.exp(0.06*wind)) + 0.03*P; // speed very sensitive to wind/strength
+        const vEff = (v0 * (1 + 0.40*(S-1)) * Math.exp(0.04*wind)) + 0.03*P; // speed very sensitive to wind/strength
         const angleEff = angleRad + (wind*0.06) - 0.04*(A-1);                 // wind tilts up/down, aim stabilizes angle
 
         // Quadratic drag (worse with low aim). Wind nudges horizontal velocity.
-        const cd = 0.018*(2 - A) + 0.004; // 0.022..0.004
+        const cd = 0.016*(2 - A) + 0.004; // 0.022..0.004
         let vx = vEff*Math.cos(angleEff) + wind*(0.9 + 0.02*P);
         let vy = vEff*Math.sin(angleEff);
         let x=0, y=0; const dt=0.02; let steps=0;
@@ -152,7 +153,7 @@
         const s = Math.max(0, Math.round(100 - err));
         setScore(s);
 
-        const didHit = err < 8; // stricter window now that physics is more sensitive
+        const didHit = err < 11; // stricter window now that physics is more sensitive
         setHit(didHit);
         setLocked(true); setRunning(false); setShowJet(true);
 
