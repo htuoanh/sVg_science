@@ -92,9 +92,9 @@
       // generous buffs (easy mode)
       const attrs=useMemo(()=>{
         const p=new Set(picks);
-        const aim=1+(p.has("coke")?1.0:0);
-        const strength=1+(p.has("fanta")?0.5:0);
-        const push=p.has("sprite")?15:0;
+        const aim=1+(p.has("cocoa")?0.5:0);
+        const strength=1+(p.has("apple milk")?0.2:0);
+        const push=p.has("chocolate milk")?10:0;
         return {aim,strength,push};
       },[picks]);
 
@@ -132,7 +132,7 @@
         const eff=rangeNoWind+attrs.push; setDistResult(eff);
         const target=distanceTarget+wind; const err=Math.abs(eff-target);
         const s=Math.max(0,Math.round(100-err)); setScore(s);
-        const didHit=err<8; setHit(didHit);
+        const didHit=err<5; setHit(didHit);
         const DRAG = 0.03; 
         setLocked(true); setRunning(false); setShowJet(true);
         pushBoardRemote({ name, score:s, picks:[...picks], hit:didHit, ts:Date.now() });
@@ -191,7 +191,7 @@
                 <div>
                   <div className="text-sm font-medium">Pick two drinks for buffs</div>
                   <div className="mt-2 grid grid-cols-3 gap-2">
-                    {[{id:"coke",name:"Coca-Cola",desc:"Aim",emoji:"🥤"},{id:"fanta",name:"Fanta",desc:"Strength",emoji:"🍊"},{id:"sprite",name:"Sprite",desc:"Push",emoji:"🛡️"}].map(o=> (
+                    {[{id:"cocoa",name:"Cocoa",desc:"Aim",emoji:"❄️"},{id:"apple milk",name:"Apple Milk",desc:"Strength",emoji:"🍏🍼"},{id:"chocolate milk",name:"Chocolate Milk",desc:"Push",emoji:"🍫🍼"}].map(o=> (
                       <button key={o.id} onClick={()=>togglePick(o.id)}
                         className={`rounded-2xl border px-3 py-3 text-center ${picks.includes(o.id)?"border-indigo-600 bg-indigo-50":"border-gray-300 bg-white"}`}>
                         <div className="text-2xl">{o.emoji}</div>
