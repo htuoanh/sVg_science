@@ -93,8 +93,8 @@
       const attrs=useMemo(()=>{
         const p=new Set(picks);
         const aim=1+(p.has("cocoa")?0.5:0);
-        const strength=1+(p.has("apple milk")?0.2:0);
-        const push=p.has("chocolate milk")?10:0;
+        const strength=1+(p.has("apple milk")?0.3:0);
+        const push=p.has("chocolate milk")?11:0;
         return {aim,strength,push};
       },[picks]);
 
