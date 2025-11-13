@@ -71,15 +71,23 @@
 
       // write/overwrite by lowercased name
       async function pushBoardRemote(entry){
-        const key=entry.name.trim().toLowerCase()||("anon-"+Math.random().toString(36).slice(2));
-        await scoresRef.doc(key).set({
-          name: entry.name||"Anon",
-          score: entry.score,
-          picks: entry.picks,
-          hit: entry.hit||false,
-          ts: firebase.firestore.FieldValue.serverTimestamp(),
-        }, { merge:true });
+        const key = entry.name.trim().toLowerCase() || ('anon-'+Math.random().toString(36).slice(2));
+        const ref = scoresRef.doc(key);
+        const snap = await ref.get();
+        const old = snap.exists ? (snap.data().score || 0) : -1;
+      
+        if (entry.score >= old) {
+          await ref.set({
+            name: entry.name || 'Anon',
+            score: entry.score,
+            picks: entry.picks,
+            hit: !!entry.hit,
+            ts: firebase.firestore.FieldValue.serverTimestamp(),
+          }, { merge: true });
+        }
+        // else: do nothing (worse score)
       }
+
 
       // generous buffs (easy mode)
       const attrs=useMemo(()=>{
